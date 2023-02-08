@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -6,6 +6,12 @@ function App() {
   const [ input, setInput ] = useState( '' );
   const [ tobuys, setTobuys ] = useState( [] );
   const [ totalCount, setTotalCount ] = useState(0)
+
+  useEffect(
+    () => {
+      return calculateTotal();
+    }, [tobuys] // dependency
+  )
 
   const addTobuys = () => {
 
@@ -26,7 +32,6 @@ function App() {
     setInput('');
 
     console.log(tobuys);
-    calculateTotal();
   };
 
   const plusItem = (index) => {
@@ -37,7 +42,6 @@ function App() {
     newTobuys[index].quantity++;
 
     setTobuys(newTobuys)
-    calculateTotal();
   };
 
   const minusItem = (index) => {
@@ -50,14 +54,13 @@ function App() {
     }
 
     setTobuys(newTobuys);
-    calculateTotal();
   };
 
   const calculateTotal = () => {
     
-    const totalCount = tobuys.reduce( (total, newTobuy) => {
+    const totalCount = tobuys.reduce( (something, newTobuy) => {
       // return total + newTobuy.quantity;
-      return newTobuy.selected ? total : total + newTobuy.quantity;
+      return newTobuy.selected ? something : something + newTobuy.quantity;
     }, 0);
 
     setTotalCount(totalCount)
@@ -68,7 +71,6 @@ function App() {
 
     if (event.target.checked) {
       newTobuys[index].selected = true;
-
     } else {
       newTobuys[index].selected = false;
     }
@@ -87,7 +89,7 @@ function App() {
       <div className='add-item'>
         
         <input onChange={ (event) => setInput( event.target.value ) } value={ input } type="text" name="item" id="inputItem" placeholder='Add an item..'/>
-        <button onClick={ () => addTobuys() } className='add-item-btn'><i class="bi bi-plus-lg"></i></button>
+        <button onClick={ () => addTobuys() } className='add-item-btn'><i className="bi bi-plus-lg"></i></button>
       </div>
       <hr />
       <ul className='item-list'>

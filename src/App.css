@@ -86,21 +86,23 @@ h2 {
 .add-item {
   display: flex;
   width: 100%;
+  position: relative;
 }
 
 .add-item-btn {
   border-radius: 0;
-  border-left: 0;
   background-color: #fff;
-  border-radius:  0px 12px 12px 0px  ;
   font-size: 18px;
-  border-color: #09ad7e;
-  border-width: 2px;
+  position: absolute;
+  padding: 8px;
+  border: none;
+  border-radius: 12px;
+  right: 0;
+  bottom: 0;
 }
 
 .add-item-btn:hover .bi-plus-lg {
-  color: #ad4509;
-  transform: scale(1.2);
+  color: #ff5e00;
 }
 
 .bi-plus-lg {
@@ -114,13 +116,15 @@ input[type='text'] {
   padding: 8px;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  border-radius: 12px 0px 0px 12px;
-  border-right: 0;
+  border-radius: 12px;
   min-height: 30px;
   border-color: #09ad7e;
-  border-width: 2px;
-
+  border: none;
 } 
+
+input[type='text']:focus {
+  outline: 2px solid #3fa144;
+}
 
 input[type="checkbox"] {
   height: 20px;
@@ -133,6 +137,7 @@ input[type="checkbox"] {
   transition: all 0.2s ease-in-out;
   appearance: none;
   z-index: 10;
+  margin: 0;
 }
 
 input[type="checkbox"]:checked:after {
@@ -165,6 +170,7 @@ button {
   display: flex;
   gap: 5px;
   align-items: center;
+  justify-content: end;
 }
 
 .delete {
@@ -180,6 +186,7 @@ button {
 .span-value {
   word-wrap: break-word;
   word-break: break-all;
+  text-align: left;
 }
 
 .count {
